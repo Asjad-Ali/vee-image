@@ -1,8 +1,7 @@
 <template>
-  <div >
-    
-    <v-card class=" text-center">
-        <v-divider></v-divider>
+    <div>
+    <v-card class="d-flex flex-column text-center">
+      <v-divider></v-divider>
       <v-card-text>
         <v-btn v-for="icon in icons" :key="icon" class="mx-4" icon>
           <v-icon size="24px">

@@ -1,22 +1,25 @@
 <template>
-  <div >
-    <v-app-bar class="px-2" app   elevation="2" elevate-on-scroll>
-        <h4 class="logStyle" ><b>Vee</b>Image</h4>
-          <!-- <v-toolbar-title ><p id="logo"><b>Vee</b>Image</p></v-toolbar-title> -->
+  <div>
+    <v-app-bar color="white" class="px-2" app elevation="2" elevate-on-scroll>
+      <h4 class="logStyle"><b>Vee</b>Image</h4>
+
 
       <v-spacer></v-spacer>
-      <div  class=" d-flex justify-space-between"> 
-        <v-btn class="hidden-xs-only" outlined>
+      <div class="d-flex justify-space-between">
+        <v-btn router to="/signup" class="primary hidden-xs-only">
           <v-icon>mdi-signup</v-icon>
-          SIGNUP</v-btn>
-        <v-btn class="hidden-xs-only ms-2" outlined>
+          SIGNUP</v-btn
+        >
+
+        <v-btn router to="/login" class="primary hidden-xs-only ms-2">
           <v-icon class="me-1">mdi-login-variant</v-icon>
-           SIGNIN</v-btn>
-        <v-btn small class="hidden-sm-and-up " outlined>
+          LOGIN</v-btn
+        >
+
+        <v-btn small class="primary hidden-sm-and-up">
           <v-icon class="pa-0 ma-0">mdi-login-variant</v-icon>
-           </v-btn>
+        </v-btn>
       </div>
-      
     </v-app-bar>
   </div>
 </template>
@@ -25,28 +28,25 @@
 export default {
   data() {
     return {
-      drawer: false,
-      items: [
-        { title: "Homepage", icon: "mdi-collage" },
-        { title: "Gallery", icon: "mdi-image-multiple" },
-        { title: "About Us", icon: "mdi-information" },
-        { title: "Logout", icon: "mdi-logout" },
-      ],
+
     };
   },
+
 };
 </script>
 
 <style>
-.logStyle{
-    font-family: 'Brush Script MT';
+.logStyle {
+  font-family: "Brush Script MT";
   font-size: 40px;
-  color:rgba(22, 22, 22, 0.712)
+  color: #1976d2;
 }
-h4,h3{
-    color:rgba(22, 22, 22, 0.712)
+h4,
+h2,
+h3 {
+  color: rgba(22, 22, 22, 0.712);
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
 </style>

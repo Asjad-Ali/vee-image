@@ -65,10 +65,16 @@
 </template>
 
 <script>
-import appbar2 from '../components/appbar2.vue';
+import appbar2 from '../components/appbar2';
 export default {
   components: { appbar2 },
   name: "landingpage",
+  data(){
+      return{
+
+      }
+  },
+  
 };
 </script>
 
