@@ -76,24 +76,20 @@
                   outlined
                   dense
                 ></v-text-field>
-               
-                 <v-file-input
-                 v-model="image"
-                 append-icon="mdi-camera"
-                 append-outer-icon=""
-                 dense
-                 prepend-icon=""
-                 label="Profile Picture"
-                 hide-details
-                 outlined
+
+                <v-file-input
+                  v-model="image"
+                  append-icon="mdi-camera"
+                  append-outer-icon=""
+                  dense
+                  prepend-icon=""
+                  label="Profile Picture"
+                  hide-details
+                  outlined
                   show-size
                   truncate-length="50"
                 >
                 </v-file-input>
-
-
-
-
 
                 <v-row class="justify-center my-5">
                   <v-btn
@@ -135,7 +131,7 @@
                   >
                 </v-col>
                 <v-col cols="12">
-                  <v-btn class="red primaryen-2 white--text" block>
+                  <v-btn class="red  white--text" block>
                     <v-icon size="20" class="me-4 ms-n4">mdi-google </v-icon>
                     Google</v-btn
                   >
@@ -163,6 +159,9 @@
 
 <script>
 import Appbar2 from "./appbar2.vue";
+import Vue from "vue";
+import axios from "axios";
+Vue.use(axios);
 export default {
   components: {
     Appbar2,
@@ -183,8 +182,8 @@ export default {
       email: "",
       password: "",
       cpassword: "",
-      image:null,
-      age:"",
+      image: null,
+      age: "",
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => v.length <= 10 || "Name must be less than 10 characters",
@@ -222,9 +221,17 @@ export default {
           email: this.email,
           age: this.age,
           password: this.password,
-          image: this.image
+          password_confirmation: this.cpassword,
+          profilePicture: this.image,
         };
+        // let user={
+        //   userId:this.age,
+        //   title:this.name,
+        //   id:this.age,
+        //   body:this.email
+        // }
         console.log(user);
+        this.$store.dispatch('signup',user)
       }
     },
   },

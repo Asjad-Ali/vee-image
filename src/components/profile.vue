@@ -1,7 +1,7 @@
 <template>
   <div class="Signpage">
     <appbar />
-    <v-main class="mb-10">
+    <v-main class="pa-0 mt-0 mb-8">
       <v-container>
         <!-- <v-card-title class="justify-center"></v-card-title> -->
         <v-row class="d-flex align-center justify-center">
@@ -37,6 +37,17 @@
                 ></v-text-field>
 
                 <v-text-field
+                  v-model="age"
+                  color="primary"
+                  append-icon="mdi-account-clock"
+                  label="Age"
+                  hint="e.g 16"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+
+                <v-text-field
                   v-model="password"
                   color="primary"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -63,6 +74,20 @@
                   outlined
                   dense
                 ></v-text-field>
+
+                <v-file-input
+                  v-model="image"
+                  append-icon="mdi-camera"
+                  append-outer-icon=""
+                  dense
+                  prepend-icon=""
+                  label="Profile Picture"
+                  hide-details
+                  outlined
+                  show-size
+                  truncate-length="50"
+                >
+                </v-file-input>
 
                 <v-row class="justify-center my-1">
                   <v-btn

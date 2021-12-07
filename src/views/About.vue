@@ -1,56 +1,80 @@
-<template >
-<v-app>
-  <appbar />
-  <v-main class="pa-0"> 
-    <h1>About Page</h1>
-    <v-container>
-      <v-row justify="center">
-        <v-menu transition="scroll-y-transition mt-1">
-        <template v-slot:activator="{ on, attrs }"><p
-         color="secondary"
-          class="ma-2" 
-          v-bind="attrs"
-          v-on="on">
-          Asjad Ali</p>
-          </template>
-          <v-list-item>Asjad Ali</v-list-item>
-          </v-menu>
-    <v-menu  transition="scroll-y-transition">
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="secondary"
-          class="ma-2"
-          v-bind="attrs"
-          v-on="on"
+<template>
+  <v-main class="ma-0 pa-0">
+    <appbar />
+    <v-container class="d-flex align-center justify-center">
+      <v-row class="d-flex align-center justify-center">
+        <v-col class="d-flex align-center justify-center"
+          cols="12"
+      lg="6"
+          md="10"
+          sm="12"
+          xs="12"
         >
-          Transition
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item >
-          <v-list-item-title >Asjad</v-list-item-title>
-        </v-list-item>
-          <v-divider></v-divider>
-        <v-list-item >
-          <v-list-item-title >Asjad</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+          <img contain width="450rem" justify-center src="../assets/landingimage.png" alt="" />
+        </v-col>
+        <v-col
+            cols="12"
+      lg="6"
+          md="10"
+          sm="12"
+          xs="12"
+          >
+          <v-subheader class="display-3 my-4">About Us</v-subheader>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
+            voluptatem eum alias aliquam officia. Dignissimos consectetur.
+          </p>
+          <v-list>
+            <v-list-item class="itemCheckAll">
+              <v-icon color="success" class="mr-3">mdi-check-all</v-icon>
+              <v-list-item-subtitle
+                >Lorem ipsum dolor sit amet adipisicing elit. Doloremque,
+                beatae.</v-list-item-subtitle
+              >
+            </v-list-item>
+            <v-list-item class="itemCheckAll">
+              <v-icon color="success" class="mr-3">mdi-check-all</v-icon>
+              <v-list-item-subtitle
+                >Lorem ipsum dolor sit amet consectetur
+                beatae.</v-list-item-subtitle
+              >
+            </v-list-item>
+            <v-list-item class="itemCheckAll">
+              <v-icon color="success" class="mr-3">mdi-check-all</v-icon>
+              <v-list-item-subtitle
+                >Adipisicing elit Doloremque, beatae.</v-list-item-subtitle
+              >
+            </v-list-item>
+            <v-list-item class="itemCheckAll">
+              <v-icon color="success" class="mr-3">mdi-check-all</v-icon>
+              <v-list-item-subtitle
+                >Lorem ipsum dolor Doloremque, beatae ipsum
+                dolor.</v-list-item-subtitle
+              >
+            </v-list-item>
+          </v-list>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
+            voluptatem eum alias aliquam officia. Dignissimos consectetur iure
+            sed, explicabo quidem vel porro eligendi iste quam! Sed amet velit
+            labore ratione.
+          </p>
+        </v-col>
       </v-row>
-
     </v-container>
   </v-main>
-</v-app>
 </template>
 
 <script>
-import Appbar from '../components/appbar.vue'
- 
-  export default {
-    name: 'gallery',
-    components: {
-        Appbar
-    },
-  }
-  
+import Appbar from "../components/appbar.vue";
+export default {
+  components: { Appbar },
+  name: "landingpage",
+  data() {
+    return {};
+  },
+};
 </script>
+
+<style>
+</style>
