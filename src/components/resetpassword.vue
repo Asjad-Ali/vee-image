@@ -8,13 +8,31 @@
           <v-col cols="12" lg="4" md="6" sm="8" xs="10">
             <v-card rounded="lg" outlined elevation="1" class="px-5 pb-5 pt-2 mb-4">
               <div class="d-flex justify-center"><h4 class="logStyle" ><b>Vee</b>Image</h4></div>
-              <div class="d-flex justify-center my-5"><h2>FORGOT</h2></div>
+              <div class="d-flex justify-center my-5"><h2>Reset Password</h2></div>
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field
-                  v-model="email"
-                  append-icon="mdi-email"
-                  :rules="emailRules"
-                  label="E-mail"
+                  v-model="password"
+                  color="primary"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show1 ? 'text' : 'password'"
+                  @click:append="show1 = !show1"
+                  :rules="passwordRules"
+                  label="Password"
+                  hint="e.g Asjad@123"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="cpassword"
+                  color="primary"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="show1 ? 'text' : 'password'"
+                  @click:append="show1 = !show1"
+                  :rules="cpasswordRules"
+                  label="Confirm Password"
+                  hint="e.g Asjad@123"
                   required
                   outlined
                   dense
