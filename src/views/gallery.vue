@@ -10,6 +10,7 @@
           <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="12" lg="3" md="4" sm="6" xs="10">
               <v-card rounded="lg" elevation="5">
             <v-img
+              
               :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
               :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
               aspect-ratio="1"

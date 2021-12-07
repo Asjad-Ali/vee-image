@@ -10,13 +10,6 @@
         </p>
         <v-btn class="primary my-4 subtitle-1" height="80px" width="300px"
           >Add photos</v-btn>
-          
-          <v-file-input
-            hide-input
-            clear-icon
-          ></v-file-input>
-          <!-- <input type="file" ref="file" style="display: none">
-<button @click="$refs.file.click()">open file dialog</button> -->
       </v-container>
     </v-main>
   </v-app>
@@ -24,12 +17,20 @@
 
 <script>
 import Appbar from "../components/appbar.vue";
-
 export default {
   name: "Home",
 
   components: {
-    Appbar,
+    Appbar
+  },
+  data() {
+    return {
+      dropzoneOptions: {
+        url: "https://httpbin.org/post",
+        thumbnailWidth: 200,
+        addRemoveLinks: true,
+      },
+    };
   },
 };
 </script>
@@ -43,11 +44,27 @@ export default {
   text-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
 }
 #uploadSubtitle {
-    color: rgba(56, 56, 56, 0.89);
+  color: rgba(56, 56, 56, 0.89);
   text-align: center;
   font-size: 2em;
   line-height: 130%;
   font-weight: 400;
   text-shadow: 1px 1px 2px rgb(0 0 0 / 25%);
+}
+.dropzone-custom-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.dropzone-custom-title {
+  margin-top: 0;
+  color: #00b782;
+}
+
+.subtitle {
+  color: #314b5f;
 }
 </style>

@@ -8,10 +8,16 @@ import forget from '../components/forgot.vue'
 import about from '../views/About.vue'
 import gallery from '../views/gallery.vue'
 import profile from '../components/profile.vue'
+import resetpassword from '../components/resetpassword.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/resetpassword',
+    name: 'resetpassword',
+    component: resetpassword
+  },
   {
     path: '/Home',
     name: 'Home',
