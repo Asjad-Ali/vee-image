@@ -1,16 +1,23 @@
 <template>
-  <div >
-    <v-toolbar class="mb-2" dense rounded="lg" app color="white" elevation="2" elevate-on-scroll>
-
-      <div class="ms-2 d-flex align-center justify-center hidden-xs-only">
-        <v-list  class="d-flex flex-row ma-0 pa-0">
+  <div>
+    <v-toolbar
+      class="align-center justify-center mb-2"
+      
+      rounded="lg"
+      app
+      color="white"
+      elevation="2"
+      elevate-on-scroll
+    >
+      <div class=" d-flex align-center justify-center hidden-xs-only">
+        <v-list class="d-flex flex-row ma-0 pa-0">
           <v-list-item
             v-for="item in baritems"
             :key="item.title"
             @click="router(item.route)"
           >
-            <v-list-item-content>
-              <v-list-item-title >{{
+            <v-list-item-content >
+              <v-list-item-title class="body-1 font-weight-bold" >{{
                 item.title
               }}</v-list-item-title>
             </v-list-item-content>
@@ -19,7 +26,19 @@
       </div>
 
       <v-spacer></v-spacer>
-
+      <div class="d-flex align-end justify-center pa-0 ma-0">
+        <v-text-field
+        
+          
+        label="Search"
+          color="dark"
+          outlined
+          placeholder="Search images"          
+          append-icon="mdi-magnify"
+          dense
+           hide-details
+        ></v-text-field>
+      </div>
     </v-toolbar>
   </div>
 </template>
@@ -30,9 +49,9 @@ export default {
     return {
       drawer: false,
       user: {
-        initials: 'Asjad',
-        fullName: 'Asjad Ali Watto',
-        email: 'asjadaliwatto@gmail.com',
+        initials: "Asjad",
+        fullName: "Asjad Ali Watto",
+        email: "asjadaliwatto@gmail.com",
       },
       items: [
         { title: "Home", icon: "mdi-collage" },
@@ -46,7 +65,6 @@ export default {
         { title: "Public", route: "/about" },
         { title: "Hidden", route: "/about" },
       ],
-
     };
   },
   methods: {
