@@ -6,12 +6,36 @@
         <!-- <v-card-title class="justify-center"></v-card-title> -->
         <v-row class="d-flex align-center justify-center">
           <v-col cols="12" lg="5" md="6" sm="6" xs="10">
-            <v-card rounded="lg" outlined elevation="1" class="px-5 pb-5 pt-2 mb-4">
+            <v-card
+              rounded="lg"
+              outlined
+              elevation="1"
+              class="px-5 pb-5 pt-2 mb-4"
+            >
               <div class="d-flex justify-center">
                 <h4 class="logStyle"><b>Vee</b>Image</h4>
               </div>
-              <div class="d-flex justify-center my-5"><h2>Profile info</h2></div>
+              <div class="d-flex justify-center my-5">
+                <h2>Profile info</h2>
+              </div>
               <v-form ref="form" v-model="valid" lazy-validation>
+                <v-row
+                  class="d-flex align-center flex-column justify-center my-2"
+                >
+                  <v-avatar size="150" color="primary">
+                    <img :src="imgUrl" alt="" />
+                  </v-avatar>
+                  <v-file-input
+                    class="ms-3"
+                    dense
+                    v-model="image"
+                    hide-input
+                    prepend-icon="mdi-camera"
+                    hide-details
+                    @change="previewImage"
+                  >
+                  </v-file-input>
+                </v-row>
                 <v-text-field
                   v-model="name"
                   color="primary"
@@ -75,20 +99,6 @@
                   dense
                 ></v-text-field>
 
-                <v-file-input
-                  v-model="image"
-                  append-icon="mdi-camera"
-                  append-outer-icon=""
-                  dense
-                  prepend-icon=""
-                  label="Profile Picture"
-                  hide-details
-                  outlined
-                  show-size
-                  truncate-length="50"
-                >
-                </v-file-input>
-
                 <v-row class="justify-center my-1">
                   <v-btn
                     width="25%"
@@ -109,9 +119,9 @@
 </template>
 
 <script>
-import Appbar from './appbar.vue';
+import Appbar from "./appbar.vue";
 export default {
-  components: {  Appbar },
+  components: { Appbar },
   name: "signup",
   computed: {
     passwordMatch() {
@@ -124,8 +134,8 @@ export default {
     return {
       show1: false,
       valid: true,
-      fname: "",
-      lname: "",
+      imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
+      name: "",
       email: "",
       username: "",
       password: "",
@@ -159,6 +169,9 @@ export default {
     };
   },
   methods: {
+    previewImage() {
+      this.imgUrl = URL.createObjectURL(this.image);
+    },
     // ========> For Signup <==================
     signup() {
       if (this.$refs.form.validate()) {

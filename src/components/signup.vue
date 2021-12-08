@@ -3,6 +3,11 @@
     <appbar-2 />
     <v-main class="mb-10">
       <v-container>
+        <div class="d-flex align-center justify-center signinAlert">
+        <v-col  cols="12" lg="3" md="4" sm="6" xs="6">
+              <v-alert  dismissible :value="alert" border="bottom" top color="blue" dense type="success">Signup Successfully</v-alert>
+        </v-col>
+      </div>
         <v-card rounded="lg" outlined elevation="1" class="px-5 pb-5 pt-4 mb-4">
           <!-- <v-card-title class="justify-center"></v-card-title> -->
           <v-row class="d-flex align-center justify-center">
@@ -15,7 +20,7 @@
               <div class="d-flex justify-center mb-4"><h2>SIGNUP</h2></div>
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field
-                  v-model="name"
+                  v-model="user.name"
                   color="primary"
                   append-icon="mdi-account"
                   :rules="nameRules"
@@ -27,7 +32,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="email"
+                  v-model="user.email"
                   append-icon="mdi-email"
                   :rules="emailRules"
                   color="primary"
@@ -39,10 +44,12 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="age"
+                  v-model="user.age"
+                  type="number"
                   color="primary"
                   append-icon="mdi-account-clock"
                   label="Age"
+                  :rules="ageRules"
                   hint="e.g 16"
                   required
                   outlined
@@ -50,7 +57,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="password"
+                  v-model="user.password"
                   color="primary"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' : 'password'"
@@ -64,7 +71,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="cpassword"
+                  v-model="user.password_confirmation"
                   color="primary"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' : 'password'"
@@ -78,7 +85,7 @@
                 ></v-text-field>
 
                 <v-file-input
-                  v-model="image"
+                  v-model="user.profilePicture"
                   append-icon="mdi-camera"
                   append-outer-icon=""
                   dense
@@ -87,7 +94,7 @@
                   hide-details
                   outlined
                   show-size
-                  truncate-length="50"
+                  truncate-length="30"
                 >
                 </v-file-input>
 
@@ -131,7 +138,7 @@
                   >
                 </v-col>
                 <v-col cols="12">
-                  <v-btn class="red  white--text" block>
+                  <v-btn class="red white--text" block>
                     <v-icon size="20" class="me-4 ms-n4">mdi-google </v-icon>
                     Google</v-btn
                   >
@@ -153,11 +160,13 @@
           </v-row>
         </v-card>
       </v-container>
-    </v-main>
+
+      </v-main>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Appbar2 from "./appbar2.vue";
 import Vue from "vue";
 import axios from "axios";
@@ -168,6 +177,7 @@ export default {
   },
   name: "signup",
   computed: {
+    ...mapGetters("signupModule", ["getResponse"]),
     passwordMatch() {
       return () =>
         this.password === this.cpassword ||
@@ -178,20 +188,28 @@ export default {
     return {
       show1: false,
       valid: true,
-      name: "",
-      email: "",
-      password: "",
-      cpassword: "",
-      image: null,
+      alert: false,
+      user: {
+        name: "",
+        email: "",
+        age: "",
+        password: "",
+        password_confirmation: "",
+        profilePicture: null,
+      },
       age: "",
       nameRules: [
         (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
+        (v) => v.length <= 32 || "Name must be less than 10 characters",
         (v) => v.length >= 3 || "Name must be greater than 3 characters",
       ],
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+      ageRules: [
+        (v) => v.length >= 2 || "Minimum age is 10 Year old Maximum 99",
+        // (v) => /^(?=.*[0-9])$/.test(v) || "Enter only digit 0-9",
       ],
       passwordRules: [
         (v) => !!v || "Password is required",
@@ -215,23 +233,8 @@ export default {
     // ========> For Signup <==================
     signup() {
       if (this.$refs.form.validate()) {
-        console.log("In signup");
-        let user = {
-          name: this.name,
-          email: this.email,
-          age: this.age,
-          password: this.password,
-          password_confirmation: this.cpassword,
-          profilePicture: this.image,
-        };
-        // let user={
-        //   userId:this.age,
-        //   title:this.name,
-        //   id:this.age,
-        //   body:this.email
-        // }
-        console.log(user);
-        this.$store.dispatch('signup',user)
+        this.alert = true;
+        // this.$store.dispatch("signupModule/signup", this.user);
       }
     },
   },
@@ -244,5 +247,9 @@ export default {
   font-weight: bold;
   font-size: 50px;
   color: #1976d2;
+}
+.signinAlert{
+  position: absolute;
+  top: 5%;
 }
 </style>

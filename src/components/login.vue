@@ -11,7 +11,7 @@
               <div class="d-flex justify-center my-4"><h2>login</h2></div>
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field
-                  v-model="email"
+                  v-model="loginUser.email"
                   append-icon="mdi-email"
                   :rules="emailRules"
                   label="E-mail"
@@ -21,7 +21,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="password"
+                  v-model="loginUser.password"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' : 'password'"
                   @click:append="show1 = !show1"
@@ -44,7 +44,7 @@
                     color="primary"
                     width="25%"
                     class="mx-10"
-                    
+                    @click="login"
                   >
                     LOGIN
                   </v-btn>
@@ -80,9 +80,10 @@ export default {
     return {
       show1: false,
       valid: true,
-      email: "",
-      password: "",
-
+      loginUser:{
+        email:"",
+        password:""
+      },
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
@@ -99,9 +100,12 @@ export default {
   },
   methods: {
     // ========> For Signup <==================
-    signup() {
+    login() {
+      alert("login")
+      console.log(this.loginUser)
       if (this.$refs.form.validate()) {
-        alert("Login Successfully");
+          this.$store.dispatch("loginModule/login",this.loginUser);
+
       }
     },
   },

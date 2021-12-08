@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="white" class="px-2" app elevation="2" elevate-on-scroll>
+    <v-app-bar color="white" app class="px-2 mb-5" elevation="1" hide-on-scroll  border="bottom">
       <h4 class="logStyle"><b>Vee</b>Image</h4>
 
 

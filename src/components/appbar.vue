@@ -5,7 +5,7 @@
         class="hidden-sm-and-up"
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <h4 class="logStyle"><b>Vee</b>Image</h4>
+      <h4 class="d-flex align-center justify-center logStyle"><b>Vee</b>Image</h4>
 
       <div class="ms-2 mt-2 hidden-xs-only">
         <v-list dense class="d-flex flex-row">
@@ -26,12 +26,12 @@
       <v-spacer></v-spacer>
 
       <div class="hidden-xs-only">
-        <v-container fluid style="height: 50px">
+        <v-container fluid style="height: 60px">
           <v-row justify="center">
-            <v-menu bottom min-width="170px" rounded offset-y>
+            <v-menu bottom min-width="230px" rounded="lg" offset-y>
               <template v-slot:activator="{ on }">
                 <v-btn icon x-large v-on="on">
-                  <v-avatar color="brown" size="48">
+                  <v-avatar color="brown" size="45">
                     <img src="../assets/asjad 1.jpg" alt="">
                   </v-avatar>
                 </v-btn>
@@ -39,19 +39,19 @@
               <v-card>
                 <v-list-item-content class="justify-center">
                   <div class="mx-auto text-center">
-                    <!-- <v-avatar color="brown">
+                    <v-avatar class="mb-2" size="180" color="brown">
                       <span class="white--text text-h5">{{
                         user.initials
                       }}</span>
-                    </v-avatar> -->
+                    </v-avatar>
                     <h4>{{ user.fullName }}</h4>
-                    <p class="text-caption ma-0 py-1">
+                    <p class="text-caption ma-1 py-1">
                       {{ user.email }}
                     </p>
                     <v-divider></v-divider>
-                    <div class="d-flex flex-column">
-                     <v-btn router to="/profile" small height="25px" rounded text> Edit Profile </v-btn>
-                    <v-btn router to="/login" small  rounded text> Logout </v-btn>
+                    <div class="d-flex flex-column mt-2">
+                     <v-btn router to="/profile" rounded text> Edit Profile </v-btn>
+                    <v-btn router to="/login"   rounded text> Logout </v-btn>
                     </div>
                   </div>
                 </v-list-item-content>
