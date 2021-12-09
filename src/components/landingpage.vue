@@ -2,7 +2,7 @@
   <v-app>
       <appbar-2 />
     <v-main class="pt-0">
-      <v-container class="d-flex align-space-between py-10">
+      <v-container class="d-flex align-space-between my-10">
         <v-row class="d-flex align-center justify-space-between">
           <v-col
             cols="12"

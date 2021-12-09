@@ -16,7 +16,7 @@ export default{
   },
   actions: {
     login({commit},payload){
-      
+    
       axios
         .post("http://192.168.88.224:8000/user/login",payload)
         .then((res) => {

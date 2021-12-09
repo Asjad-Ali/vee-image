@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <v-container>
     <v-toolbar
       class="align-center justify-center mb-2"
       
       rounded="lg"
       app
+      dense
       color="white"
       elevation="2"
       elevate-on-scroll
@@ -40,7 +41,7 @@
         ></v-text-field>
       </div>
     </v-toolbar>
-  </div>
+  </v-container>
 </template>
 
 <script>

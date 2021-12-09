@@ -23,7 +23,46 @@
         </v-list>
       </div>
 
+
+
+
       <v-spacer></v-spacer>
+
+      <div class="text-center">
+    <v-bottom-sheet
+      v-model="sheet"
+      
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+        class="me-2"
+        text
+        large
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon size="35">mdi-cloud-upload</v-icon>
+        </v-btn>
+      </template>
+      <v-sheet
+        class="text-center"
+        height="200px"
+      >
+        <v-btn
+          class="mt-6"
+          text
+          color="error"
+          @click="sheet = !sheet"
+        >
+          close
+        </v-btn>
+        <div class="my-3">
+          This is a bottom sheet using the inset prop
+        </div>
+      </v-sheet>
+    </v-bottom-sheet>
+  </div>
+
 
       <div class="hidden-xs-only">
         <v-container fluid style="height: 60px">
@@ -109,6 +148,7 @@ export default {
   data() {
     return {
       drawer: false,
+      sheet: false,
       user: {
         initials: 'Asjad',
         fullName: 'Asjad Ali Watto',

@@ -19,6 +19,25 @@
             <v-col cols="12" lg="4" md="6" sm="6" xs="10">
               <div class="d-flex justify-center mb-4"><h2>SIGNUP</h2></div>
               <v-form ref="form" v-model="valid" lazy-validation>
+
+                <v-row
+                  class="d-flex align-center flex-column justify-center my-2"
+                >
+                  <v-avatar size="150" color="primary">
+                    <img :src="imgUrl" alt="" />
+                  </v-avatar>
+                  <v-file-input
+                    class="ms-3"
+                    dense
+                    v-model="user.profilePicture"
+                    hide-input
+                    prepend-icon="mdi-camera"
+                    hide-details
+                    @change="previewImage"
+                  >
+                  </v-file-input>
+                </v-row>
+
                 <v-text-field
                   v-model="user.name"
                   color="primary"
@@ -84,7 +103,7 @@
                   dense
                 ></v-text-field>
 
-                <v-file-input
+                <!-- <v-file-input
                   v-model="user.profilePicture"
                   append-icon="mdi-camera"
                   append-outer-icon=""
@@ -96,7 +115,7 @@
                   show-size
                   truncate-length="30"
                 >
-                </v-file-input>
+                </v-file-input> -->
 
                 <v-row class="justify-center my-5">
                   <v-btn
@@ -129,7 +148,7 @@
               xs="10"
               class="d-flex align-start justify-start"
             >
-              <v-row class="d-flex flex-column align-center pa-0 mt-n8">
+              <v-row class="d-flex flex-column align-center pa-0">
                 <div><p class="pa-0 mt-n5">Signin with another account</p></div>
                 <v-col cols="12" class="pt-0 mt-0">
                   <v-btn block class="primary">
@@ -189,6 +208,7 @@ export default {
       show1: false,
       valid: true,
       alert: false,
+      imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
       user: {
         name: "",
         email: "",
@@ -230,6 +250,9 @@ export default {
     };
   },
   methods: {
+        previewImage() {
+      this.imgUrl = URL.createObjectURL(this.user.profilePicture);
+    },
     // ========> For Signup <==================
     signup() {
       if (this.$refs.form.validate()) {
