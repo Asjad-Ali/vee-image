@@ -3,7 +3,7 @@
 
     <v-row class="d-flex flex-row">
       <v-col
-        v-for="n in 9"
+        v-for="n in pic"
         :key="n"
         class="d-flex child-flex"
         cols="12"
@@ -35,6 +35,12 @@
 
 <script>
 export default {
-  name: "image",
+  props: ['picNum'],
+  name: "imagec",
+  data(){
+    return{
+      pic:5
+    }
+  }
 };
 </script>

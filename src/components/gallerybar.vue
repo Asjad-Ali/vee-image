@@ -2,15 +2,13 @@
   <v-container>
     <v-toolbar
       class="align-center justify-center mb-2"
-      
       rounded="lg"
       app
-      dense
       color="white"
       elevation="2"
       elevate-on-scroll
     >
-      <div class=" d-flex align-center justify-center hidden-xs-only">
+      <div class=" d-flex align-center justify-center">
         <v-list class="d-flex flex-row ma-0 pa-0">
           <v-list-item
             v-for="item in baritems"

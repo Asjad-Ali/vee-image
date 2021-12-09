@@ -18,6 +18,7 @@ const routes = [
     name: 'resetpassword',
     component: resetpassword
   },
+
   {
     path: '/Home',
     name: 'Home',
