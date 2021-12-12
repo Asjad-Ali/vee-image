@@ -40,7 +40,6 @@
                   v-model="name"
                   color="primary"
                   append-icon="mdi-account"
-                  :rules="nameRules"
                   label="Name"
                   hint="e.g Asjad"
                   required
@@ -51,7 +50,6 @@
                 <v-text-field
                   v-model="email"
                   append-icon="mdi-email"
-                  :rules="emailRules"
                   color="primary"
                   label="E-mail"
                   hint="e.g asjadaliwatto@gmail.com"
@@ -66,34 +64,6 @@
                   append-icon="mdi-account-clock"
                   label="Age"
                   hint="e.g 16"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
-
-                <v-text-field
-                  v-model="password"
-                  color="primary"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show1 ? 'text' : 'password'"
-                  @click:append="show1 = !show1"
-                  :rules="passwordRules"
-                  label="Password"
-                  hint="e.g Asjad@123"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
-
-                <v-text-field
-                  v-model="cpassword"
-                  color="primary"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  :type="show1 ? 'text' : 'password'"
-                  @click:append="show1 = !show1"
-                  :rules="cpasswordRules"
-                  label="Confirm Password"
-                  hint="e.g Asjad@123"
                   required
                   outlined
                   dense
@@ -119,60 +89,39 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Appbar from "./appbar.vue";
 export default {
   components: { Appbar },
   name: "signup",
-  computed: {
-    passwordMatch() {
-      return () =>
-        this.password === this.cpassword ||
-        "Password and Confirm password doesn't match";
-    },
-  },
+
   data() {
     return {
       show1: false,
       valid: true,
-      image:"",
+      // getuser:[],
+        name: "",
+        email: "",
+        age: "",
+        image: "",
       imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
-      name: "",
-      email: "",
-      age:"",
-      username: "",
-      password: "",
-      cpassword: "",
-      phoneNumber: "",
-      nameRules: [
-        (v) => !!v || "Name is required",
-        (v) => v.length <= 10 || "Name must be less than 10 characters",
-        (v) => v.length >= 3 || "Name must be greater than 3 characters",
-      ],
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
-      ],
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) => v.length >= 8 || "Min 8 characters",
-        (v) =>
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!.%*?&])[A-Za-z\d@$!%*.?&]{8,}$/.test(
-            v
-          ) || "Password is not valid Enter password like e.g Asjad@264",
-      ],
-      cpasswordRules: [
-        (v) => !!v || "Confirm Password is required",
-        (v) => v.length >= 8 || "Min 8 characters",
-        (v) =>
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!.%*?&])[A-Za-z\d@$!%*.?&]{8,}$/.test(
-            v
-          ) || "Password is not valid Enter password like e.g Asjad@264",
-      ],
+      user: {
+        name: this.getCurrentUser[0].name,
+        email: this.getCurrentUser[0].email,
+        age: this.getCurrentUser[0].age,
+        profile_pic: this.getCurrentUser[0].profile_pic,
+      },
+ 
     };
   },
-    mounted(){
+  
 
-    },
+  computed: {
+      ...mapGetters("currentUser",["getCurrentUser"])
+  },
+  mounted () {
+   this.$store.modules['currentUser/nested/module/someGetter']
+},
   methods: {
     previewImage() {
       this.imgUrl = URL.createObjectURL(this.image);

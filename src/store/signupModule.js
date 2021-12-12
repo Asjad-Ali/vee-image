@@ -1,5 +1,4 @@
 import axios from 'axios'
-import router from '../router'
 
 export default{
   namespaced:true,
@@ -19,7 +18,7 @@ export default{
         .then((res) => {
           console.log("Sign Response",res.data);
           commit('signupRes',res)
-          router.push({ name: "login"})
+          // open("/login","_self")
         })
         .catch(error => {
           console.log(error.res)

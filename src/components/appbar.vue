@@ -52,7 +52,7 @@
               <template v-slot:activator="{ on }">
                 <v-btn icon x-large v-on="on">
                   <v-avatar color="brown" size="45">
-                    <img src="../assets/asjad 1.jpg" alt="" />
+                    <img :src="getCurrentUser[0].profile_pic" alt="" />
                   </v-avatar>
                 </v-btn>
               </template>
@@ -68,7 +68,7 @@
                     </p>
                     <v-divider></v-divider>
                     <div class="d-flex flex-column mt-2">
-                      <v-btn  @click="currentProfile" rounded text>
+                      <v-btn  router to="/profile" rounded text>
                         Edit Profile
                       </v-btn>
                       <v-btn @click="logout" rounded text> Logout </v-btn>
@@ -81,19 +81,21 @@
         </v-container>
       </div>
     </v-app-bar>
+
+
     <v-navigation-drawer v-model="drawer" fixed temporary>
       <template v-slot:prepend>
         <v-list-item two-line>
           <v-list-item-avatar>
-            <img src="../assets/asjad 1.jpg" alt="" />
+            <img :src="getCurrentUser[0].profile_pic" alt="" />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title
               ><a @click="route('profile')"
-                ><b>Asjad Ali </b></a
-              ></v-list-item-title
+                ><b>{{ getCurrentUser[0].name }}</b></a>
+                </v-list-item-title
             >
-            <v-list-item-subtitle class="success--text"
+            <v-list-item-subtitle class="success--text font-weight-bold"
               >Logged In</v-list-item-subtitle
             >
           </v-list-item-content>
@@ -137,11 +139,7 @@ export default {
     return {
       drawer: false,
       sheet: false,
-      user: {
-        initials: "Asjad",
-        fullName: "Asjad Ali Watto",
-        email: "asjadaliwatto@gmail.com",
-      },
+
       dropzoneOptions: {
         url: "https://httpbin.org/post",
         thumbnailWidth: 200,
