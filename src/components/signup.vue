@@ -24,7 +24,7 @@
                   <v-file-input
                     class="ms-3"
                     dense
-                    v-model="user.profilePicture"
+                    v-model="user.profile_pic"
                     hide-input
                     prepend-icon="mdi-camera"
                     hide-details
@@ -85,7 +85,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="user.password_confirmation"
+                  v-model="cpassword"
                   color="primary"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   :type="show1 ? 'text' : 'password'"
@@ -188,16 +188,16 @@ export default {
       show1: false,
       valid: true,
       alert: false,
+      cpassword:"",
       imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
       user: {
         name: "",
         email: "",
         age: "",
         password: "",
-        password_confirmation: "",
-        profilePicture: null,
+        profile_pic: "",
       },
-      age: "",
+      
       nameRules: [
         (v) => !!v || "Name is required",
         (v) => v.length <= 32 || "Name must be less than 10 characters",
@@ -237,7 +237,7 @@ export default {
         "load",
         function () {
           console.log(reader.result);
-          vm.user.profilePicture = reader.result;
+          vm.user.profile_pic = reader.result;
         },
         false
       );
@@ -246,14 +246,13 @@ export default {
     },
 
       previewImage() {
-      this.imgUrl = URL.createObjectURL(this.user.profilePicture);
+      this.imgUrl = URL.createObjectURL(this.user.profile_pic);
     },
     // ========> For Signup <==================
     signup() {
       if (this.$refs.form.validate()) {
         console.log(this.user)
-
-        // this.$store.dispatch("signupModule/signup", this.user);
+        this.$store.dispatch("signupModule/signup", this.user);
       }
     },
   },
