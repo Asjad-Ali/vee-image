@@ -3,11 +3,6 @@
     <appbar-2 />
     <v-main class="mb-10">
       <v-container>
-        <div class="d-flex align-center justify-center signinAlert">
-        <v-col  cols="12" lg="3" md="4" sm="6" xs="6">
-              <v-alert  dismissible :value="alert" border="bottom" top color="blue" dense type="success">Signup Successfully</v-alert>
-        </v-col>
-      </div>
         <v-card rounded="lg" outlined elevation="1" class="px-5 pb-5 pt-4 mb-4">
           <!-- <v-card-title class="justify-center"></v-card-title> -->
           <v-row class="d-flex align-center justify-center">
@@ -33,7 +28,7 @@
                     hide-input
                     prepend-icon="mdi-camera"
                     hide-details
-                    @change="previewImage"
+                    @change="convertImageBase64"
                   >
                   </v-file-input>
                 </v-row>
@@ -103,30 +98,14 @@
                   dense
                 ></v-text-field>
 
-                <!-- <v-file-input
-                  v-model="user.profilePicture"
-                  append-icon="mdi-camera"
-                  append-outer-icon=""
-                  dense
-                  prepend-icon=""
-                  label="Profile Picture"
-                  hide-details
-                  outlined
-                  show-size
-                  truncate-length="30"
-                >
-                </v-file-input> -->
-
-                <v-row class="justify-center my-5">
                   <v-btn
-                    width="25%"
+
                     color="primary"
-                    class="mx-10"
                     @click="signup"
+                    block
                   >
                     SIGNUP
                   </v-btn>
-                </v-row>
                 <v-row class="d-flex justify-center mt-5">
                   <p>
                     Already have an account
@@ -197,6 +176,7 @@ export default {
   name: "signup",
   computed: {
     ...mapGetters("signupModule", ["getResponse"]),
+
     passwordMatch() {
       return () =>
         this.password === this.cpassword ||
@@ -228,8 +208,7 @@ export default {
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
       ageRules: [
-        (v) => v.length >= 2 || "Minimum age is 10 Year old Maximum 99",
-        // (v) => /^(?=.*[0-9])$/.test(v) || "Enter only digit 0-9",
+        (v) => v.length == 2 || "Minimum age is 10 Year old Maximum 99",
       ],
       passwordRules: [
         (v) => !!v || "Password is required",
@@ -250,13 +229,30 @@ export default {
     };
   },
   methods: {
-        previewImage() {
+    convertImageBase64(event) {
+      this.previewImage()
+      let vm = this;
+      const reader = new FileReader();
+      reader.addEventListener(
+        "load",
+        function () {
+          console.log(reader.result);
+          vm.user.profilePicture = reader.result;
+        },
+        false
+      );
+      reader.readAsDataURL(event);
+ 
+    },
+
+      previewImage() {
       this.imgUrl = URL.createObjectURL(this.user.profilePicture);
     },
     // ========> For Signup <==================
     signup() {
       if (this.$refs.form.validate()) {
-        this.alert = true;
+        console.log(this.user)
+
         // this.$store.dispatch("signupModule/signup", this.user);
       }
     },

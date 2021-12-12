@@ -10,7 +10,6 @@
 <script>
 
 import Foter from './components/foter.vue';
-// import axios from 'axios'
 export default {
   components: { Foter },
   data(){
@@ -18,9 +17,7 @@ export default {
       
     }
   },
-  mounted(){
-
-  }
+ 
 
 
 };

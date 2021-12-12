@@ -60,7 +60,7 @@
                 <v-list-item-content class="justify-center">
                   <div class="mx-auto text-center">
                     <v-avatar class="mb-2" size="180" color="brown">
-                      <!-- <img :src="getCurrentUser[0].profile_pic" alt=""> -->
+                      <img :src="getCurrentUser[0].profile_pic" alt="">
                     </v-avatar>
                     <h4>{{ getCurrentUser[0].name }}</h4>
                     <p class="text-caption ma-1 py-1">
