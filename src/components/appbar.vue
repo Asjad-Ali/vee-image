@@ -60,18 +60,18 @@
                 <v-list-item-content class="justify-center">
                   <div class="mx-auto text-center">
                     <v-avatar class="mb-2" size="180" color="brown">
-                      <img src="../assets/asjad 1.jpg" alt="">
+                      <!-- <img :src="getCurrentUser[0].profile_pic" alt=""> -->
                     </v-avatar>
-                    <h4>{{ user.fullName }}</h4>
+                    <h4>{{ getCurrentUser[0].name }}</h4>
                     <p class="text-caption ma-1 py-1">
-                      {{ user.email }}
+                      {{ getCurrentUser[0].email }}
                     </p>
                     <v-divider></v-divider>
                     <div class="d-flex flex-column mt-2">
-                      <v-btn router to="/profile" rounded text>
+                      <v-btn  @click="currentProfile" rounded text>
                         Edit Profile
                       </v-btn>
-                      <v-btn router to="/login" rounded text> Logout </v-btn>
+                      <v-btn @click="logout" rounded text> Logout </v-btn>
                     </div>
                   </div>
                 </v-list-item-content>
@@ -126,6 +126,7 @@
 <script>
 import vue2Dropzone from "vue2-dropzone";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "appbar",
@@ -160,10 +161,19 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters("currentUser",["getCurrentUser"])
+  },
   methods: {
     router(route) {
       this.$router.push(route);
     },
+    logout(){
+      this.$store.dispatch("logout")
+    },
+    currentProfile(){
+      this.$store.dispatch("currentUser/currentUser")
+    }
   },
 };
 </script>

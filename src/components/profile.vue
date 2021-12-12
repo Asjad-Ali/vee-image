@@ -55,7 +55,7 @@
                   color="primary"
                   label="E-mail"
                   hint="e.g asjadaliwatto@gmail.com"
-                  required
+                  readonly
                   outlined
                   dense
                 ></v-text-field>
@@ -104,7 +104,7 @@
                     width="25%"
                     color="primary"
                     class="mx-10"
-                    @click="signup"
+                    @click="update"
                   >
                     UPDATE
                   </v-btn>
@@ -134,9 +134,11 @@ export default {
     return {
       show1: false,
       valid: true,
+      image:"",
       imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
       name: "",
       email: "",
+      age:"",
       username: "",
       password: "",
       cpassword: "",
@@ -168,16 +170,16 @@ export default {
       ],
     };
   },
+    mounted(){
+
+    },
   methods: {
     previewImage() {
       this.imgUrl = URL.createObjectURL(this.image);
     },
-    // ========> For Signup <==================
-    signup() {
-      if (this.$refs.form.validate()) {
-        alert("Login Successfully");
-      }
-    },
+    update(){
+      this.$store.dispatch("currentUser/currentUser")
+    }
   },
 };
 </script>

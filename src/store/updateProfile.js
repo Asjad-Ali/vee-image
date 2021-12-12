@@ -1,5 +1,4 @@
 import axios from 'axios'
-import router from '../router'
 
 export default{
   namespaced:true,
@@ -12,14 +11,13 @@ export default{
     }
   },
   actions: {
-    signup({commit},payload){
-      console.log(payload)
+    updateProfile({commit}){
       axios
-        .post("https://imagesharelink.herokuapp.com/api/register", payload)
+        .post("https://imagesharelink.herokuapp.com/api/profile/update")
         .then((res) => {
-          console.log("Sign Response",res.data);
-          commit('signupRes',res)
-          router.push({ name: "login"})
+          console.log("Update Response",res.data);
+          commit('signupRes',res.data)
+        //   window.open("/login", '_self');
         })
         .catch(error => {
           console.log(error.res)

@@ -3,6 +3,24 @@
     <appbar-2 />
     <v-main class="mb-10">
       <v-container>
+
+            <v-snackbar
+      v-model="snackbar"
+    >
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="pink"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
+
         <!-- <v-card-title class="justify-center"></v-card-title> -->
         <v-row class="d-flex align-center justify-center">
           <v-col cols="12" lg="4" md="6" sm="8" xs="10">
@@ -11,7 +29,7 @@
               <div class="d-flex justify-center my-5"><h2>FORGOT</h2></div>
               <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field
-                  v-model="email"
+                  v-model="user.email"
                   append-icon="mdi-email"
                   :rules="emailRules"
                   label="E-mail"
@@ -27,15 +45,15 @@
                     color="primary"
                     width="25%"
                     class="mx-10"
-                    @click="login"
+                    @click="forgot($event)"
                   >
                     check
                   </v-btn>
                 </v-row>
-                <v-row justify="center">
+                <v-row class="d-flex justify-center mt-5">
                   <p>
-                    If you want create new account
-                    <router-link to="/signup">Click Here</router-link>
+                    Already have an account
+                    <router-link to="/login">Click Here</router-link>
                   </p>
                 </v-row>
               </v-form>
@@ -44,48 +62,44 @@
         </v-row>
       </v-container>
     </v-main>
+     <v-snackbar top color="red" :value="getSnackbarStutes" timeout="5000">
+        {{ getSnackbarErrorMsg }}
+      </v-snackbar>
   </div>
 </template>
 
 <script>
 import Appbar2 from "./appbar2.vue";
+import { mapGetters } from "vuex";
 export default {
   components: { Appbar2 },
   name: "signup",
   computed: {
-    passwordMatch() {
-      return () =>
-        this.password === this.cpassword ||
-        "Password and Confirm password doesn't match";
-    },
+    ...mapGetters(["getSnackbarStutes"]),
+    ...mapGetters(["getSnackbarErrorMsg"]),
   },
   data() {
     return {
+      snackbar: false,
       show1: false,
       valid: true,
-      email: "",
-      password: "",
-
+      user:{
+        email:""
+      },
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
-      passwordRules: [
-        (v) => !!v || "Password is required",
-        (v) => v.length >= 8 || "Min 8 characters",
-        (v) =>
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!.%*?&])[A-Za-z\d@$!%*.?&]{8,}$/.test(
-            v
-          ) || "Password is not valid Enter password like e.g Asjad@264",
-      ],
+
     };
   },
   methods: {
     // ========> For Signup <==================
-    signup() {
-      if (this.$refs.form.validate()) {
-        alert("Login Successfully");
-      }
+    forgot(event) {
+       this.$store.dispatch("updateSnackBarStatus");
+        this.$store.dispatch("forgotModule/forgot", this.user);
+        event.preventDefault()
+      
     },
   },
 };

@@ -4,25 +4,25 @@ import axios from 'axios'
 export default{
   namespaced:true,
   state:{
-    
     loginResponse:[]
   },
   mutations: {
     loginRes(state,data){
       state.loginResponse=data
+      console.log(data)
     }
   },
   actions: {
-    login({commit},payload){
+    getImage({commit},payload){
+      console.log(payload)
       axios
-        .post("https://imagesharelink.herokuapp.com/api/login",payload)
+        .get("https://imagesharelink.herokuapp.com/api/forget_password",payload)
         .then((res) => {
+          console.log("Image Response",res.data);
           commit('loginRes',res.data)
-          localStorage.setItem("Token",JSON.stringify(res.data.Token))
-          console.log("Login response",res.data);
-          open("/Home","_self")
-        }).catch(error => {
-          console.log("Login catch error",error.data)
+        })
+        .catch(error => {
+          console.log("errors catch",error.data.errors)
         });
     }
   },

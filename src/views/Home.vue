@@ -2,6 +2,9 @@
   <v-main class="d-flex align-center pa-0">
     <appbar />
     <v-container class="d-flex align-center justify-center mt-10">
+      <v-row>
+        <img :src="`imagesharelink.herokuapp.com/storage/20211211195112picture`" alt="">
+      </v-row>
       <vue-dropzone :options="dropzoneOptions" :useCustomSlot="true">
         <div class="d-flex flex-column align-center justify-center">
           <h1 id="uploadTitle">Upload and share your images.</h1>
@@ -21,11 +24,11 @@
 <script>
 import Appbar from "../components/appbar.vue";
 import vue2Dropzone from "vue2-dropzone";
+import axios from 'axios'
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
   name: "Home",
-
   components: {
     Appbar,
     vueDropzone: vue2Dropzone,
@@ -37,11 +40,16 @@ export default {
           thumbnailWidth: 200,
           maxFilesize: 2,
           addRemoveLinks: true,
-          
           headers: { "My-Awesome-Header": "header value" }
       }
     };
   },
+  beforeCreate(){
+      let token=JSON.parse(localStorage.getItem("Token"))
+      console.log("Token:",token)
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+    this.$store.dispatch("currentUser/currentData")
+  }
 };
 </script>
 
