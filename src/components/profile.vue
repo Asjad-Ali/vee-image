@@ -23,7 +23,7 @@
                   class="d-flex align-center flex-column justify-center my-2"
                 >
                   <v-avatar size="150" color="primary">
-                    <img :src="imgUrl" alt="" />
+                    <img :src="image" alt="" />
                   </v-avatar>
                   <v-file-input
                     class="ms-3"
@@ -85,12 +85,15 @@
         </v-row>
       </v-container>
     </v-main>
+         <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
+        {{ getSnackbarErrorMsg }}
+      </v-snackbar>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Appbar from "./appbar.vue";
+import Appbar from './appbar.vue';
 export default {
   components: { Appbar },
   name: "signup",
@@ -105,11 +108,10 @@ export default {
         age: "",
         image: "",
       imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
-      user: {
-        name: this.getCurrentUser[0].name,
-        email: this.getCurrentUser[0].email,
-        age: this.getCurrentUser[0].age,
-        profile_pic: this.getCurrentUser[0].profile_pic,
+      userUpdate: {
+        name: this.name,
+        age: this.age,
+        profile_pic: this.image,
       },
  
     };
@@ -117,19 +119,28 @@ export default {
   
 
   computed: {
-      ...mapGetters("currentUser",["getCurrentUser"])
+        ...mapGetters("updateProfile",["getSnackbarStutes"]),
+    ...mapGetters("updateProfile",["getSnackbarErrorMsg"]),
+      // ...mapGetters("currentUser",["getCurrentUser"])
   },
-  mounted () {
-   this.$store.modules['currentUser/nested/module/someGetter']
-},
+//   mounted () {
+//    this.$store.modules['currentUser/nested/module/someGetter']
+// },
   methods: {
     previewImage() {
       this.imgUrl = URL.createObjectURL(this.image);
     },
     update(){
-      this.$store.dispatch("currentUser/currentUser")
+      this.$store.dispatch("updateProfile/updateProfile",this.userUpdate)
     }
   },
+  mounted(){
+        const userData = JSON.parse(localStorage.getItem("currentUser"))
+    this.name=(userData[0].name)
+    this.age=(userData[0].age)
+    this.email=(userData[0].email)
+    this.image=(userData[0].profile_pic)
+  }
 };
 </script>
 

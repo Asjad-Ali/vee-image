@@ -62,7 +62,7 @@
         </v-row>
       </v-container>
     </v-main>
-     <v-snackbar top color="red" :value="getSnackbarStutes" timeout="5000">
+     <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
         {{ getSnackbarErrorMsg }}
       </v-snackbar>
   </div>

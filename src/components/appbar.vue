@@ -122,6 +122,9 @@
         </v-list>
       </div>
     </v-navigation-drawer>
+         <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
+        {{ getSnackbarErrorMsg }}
+      </v-snackbar>
   </v-container>
 </template>
 
