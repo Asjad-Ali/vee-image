@@ -1,11 +1,8 @@
 <template>
   <v-main class="d-flex align-center pa-0">
     <appbar />
-    <v-container class="d-flex align-center justify-center mt-10">
-      <v-row>
-        <img :src="`imagesharelink.herokuapp.com/storage/20211211195112picture`" alt="">
-      </v-row>
-      <vue-dropzone :options="dropzoneOptions" :useCustomSlot="true">
+    <v-container class="d-flex align-center flex-column justify-center mt-10">
+      <vue-dropzone :options="dropzoneOptions" @vdropzone-complete="uploadComOrFail" :useCustomSlot="true">
         <div class="d-flex flex-column align-center justify-center">
           <h1 id="uploadTitle">Upload and share your images.</h1>
           <p id="uploadSubtitle">
@@ -17,14 +14,39 @@
           >
         </div>
       </vue-dropzone>
+      <v-row class="d-flex flex-column align-center justify-center my-10">
+        <v-col >
+                <v-text-field
+                  v-model="imageObj.imageType"
+                  color="primary"
+                  append-icon="mdi-image"
+                  :rules="nameRules"
+                  label="Image Status"
+                  hide-details=""
+                  placeholder="Public, Private, Hidden"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+        </v-col>
+        <v-col class="d-flex justify-center">
+          <v-btn @click="upload" x-large class="primary" rounded>
+            Upload
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-container>
+    <v-snackbar top color="black" :value="getSnackbarStutes" timeout="3000">
+      {{ getSnackbarErrorMsg }}
+    </v-snackbar>
   </v-main>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import Appbar from "../components/appbar.vue";
 import vue2Dropzone from "vue2-dropzone";
-import axios from 'axios'
+import axios from "axios";
 import "vue2-dropzone/dist/vue2Dropzone.min.css";
 
 export default {
@@ -35,21 +57,48 @@ export default {
   },
   data() {
     return {
+      imageObj:{
+        imageBase64:"",
+      imageType:"",
+      },
       dropzoneOptions: {
-          url: 'https://httpbin.org/post',
-          thumbnailWidth: 200,
-          maxFilesize: 2,
-          addRemoveLinks: true,
-          headers: { "My-Awesome-Header": "header value" }
-      }
+        url: 'https://httpbin.org/post',
+        thumbnailWidth: 200,
+        maxFilesize: 1,
+        addRemoveLinks: true,
+        headers: { "My-Awesome-Header": "header value" },
+      },
     };
   },
-  beforeCreate(){
-      let token=JSON.parse(localStorage.getItem("Token"))
-      console.log("Token:",token)
-      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
-    this.$store.dispatch("currentUser/currentData")
-  }
+  methods:{
+    upload(){
+      console.log("I am image obj")
+      console.log(this.imageObj)
+      this.$store.dispatch("uploadImage/upliadImageFun",this.imageObj)
+    },
+    uploadComOrFail: async function (response){
+      if(response.status=="success")
+      {
+        
+        this.imageObj.imageBase64 = response.dataURL
+        console.log("Successfully uploaded")
+      }
+      else
+      {
+        console.log("Upload faild")
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(["getSnackbarStutes"]),
+    ...mapGetters(["getSnackbarErrorMsg"]),
+  },
+  mounted() {
+    let token = JSON.parse(localStorage.getItem("Token"));
+    console.log("Token:", token);
+    axios.defaults.headers.common = { Authorization: `Bearer ${token}` };
+    this.$store.dispatch("currentUser/currentData");
+  },
 };
 </script>
 

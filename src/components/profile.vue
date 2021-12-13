@@ -36,6 +36,17 @@
                   >
                   </v-file-input>
                 </v-row>
+
+                <v-text-field
+                  v-model="id"
+                  color="primary"
+                  append-icon="mdi-counter"
+                  label="Id"
+                  required
+                  outlined
+                  dense
+                ></v-text-field>
+
                 <v-text-field
                   v-model="name"
                   color="primary"
@@ -69,6 +80,16 @@
                   dense
                 ></v-text-field>
 
+                <v-text-field
+                  v-model="pfImageLink"
+                  color="primary"
+                  readonly
+                  append-icon="mdi-link"
+                  label="Profile Image Link"
+                  outlined
+                  dense
+                ></v-text-field>
+
                 <v-row class="justify-center my-1">
                   <v-btn
                     width="25%"
@@ -85,15 +106,15 @@
         </v-row>
       </v-container>
     </v-main>
-         <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
-        {{ getSnackbarErrorMsg }}
-      </v-snackbar>
+    <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
+      {{ getSnackbarErrorMsg }}
+    </v-snackbar>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Appbar from './appbar.vue';
+import { mapGetters } from "vuex";
+import Appbar from "./appbar.vue";
 export default {
   components: { Appbar },
   name: "signup",
@@ -103,44 +124,46 @@ export default {
       show1: false,
       valid: true,
       // getuser:[],
-        name: "",
-        email: "",
-        age: "",
-        image: "",
-      imgUrl:"https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
+      id: "",
+      name: "",
+      email: "",
+      age: "",
+      image: "",
+      imgUrl:
+        "https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
       userUpdate: {
         name: this.name,
         age: this.age,
         profile_pic: this.image,
       },
- 
     };
   },
-  
 
   computed: {
-        ...mapGetters("updateProfile",["getSnackbarStutes"]),
-    ...mapGetters("updateProfile",["getSnackbarErrorMsg"]),
-      // ...mapGetters("currentUser",["getCurrentUser"])
+    ...mapGetters("updateProfile", ["getSnackbarStutes"]),
+    ...mapGetters("updateProfile", ["getSnackbarErrorMsg"]),
+    // ...mapGetters("currentUser",["getCurrentUser"])
   },
-//   mounted () {
-//    this.$store.modules['currentUser/nested/module/someGetter']
-// },
+  //   mounted () {
+  //    this.$store.modules['currentUser/nested/module/someGetter']
+  // },
   methods: {
     previewImage() {
       this.imgUrl = URL.createObjectURL(this.image);
     },
-    update(){
-      this.$store.dispatch("updateProfile/updateProfile",this.userUpdate)
-    }
+    update() {
+      this.$store.dispatch("updateProfile/updateProfile", this.userUpdate);
+    },
   },
-  mounted(){
-        const userData = JSON.parse(localStorage.getItem("currentUser"))
-    this.name=(userData[0].name)
-    this.age=(userData[0].age)
-    this.email=(userData[0].email)
-    this.image=(userData[0].profile_pic)
-  }
+  mounted() {
+    const userData = JSON.parse(localStorage.getItem("currentUser"));
+    this.id = userData[0].id;
+    this.name = userData[0].name;
+    this.age = userData[0].age;
+    this.email = userData[0].email;
+    this.image = userData[0].profile_pic;
+    this.pfImageLink = userData[0].profile_pic;
+  },
 };
 </script>
 
