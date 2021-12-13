@@ -1,5 +1,5 @@
 <template>
-  <v-container-fluid>
+  <div>
     <v-app-bar color="white" elevation="2">
       <v-app-bar-nav-icon
         class="hidden-sm-and-up"
@@ -125,7 +125,7 @@
          <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
         {{ getSnackbarErrorMsg }}
       </v-snackbar>
-  </v-container-fluid>
+  </div>
 </template>
 
 <script>

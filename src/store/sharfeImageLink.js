@@ -3,14 +3,10 @@ import axios from 'axios'
 export default{
   namespaced:true,
   state:{
-    allimages:[],
     Snackbar:false,
     snackbarErrorMsg:"",
   },
   mutations: {
-    allImages(state,resImages){
-      state.allimages=resImages
-    },
     SET_SNACKBAR(state,Snackbar){
       state.Snackbar = Snackbar;
     },
@@ -22,14 +18,17 @@ export default{
     updateSnackBarStatus({commit}){
       commit("SET_SNACKBAR",false);
      },
-    getImageFun({commit}){
-      console.log("Upload image")
-      axios.post("https://imagesharelink.herokuapp.com/api/my_images")
+    updateProfile({commit},payload){
+      console.log("Update value",payload)
+      let token=JSON.parse(localStorage.getItem("Token"))
+      axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
+      axios
+        .post("https://imagesharelink.herokuapp.com/api/profile/update",payload)
         .then((res) => {
-          console.log("Get All Image Response",res.data);
-          commit('allImages',res.data.Images)
+          console.log("Update Response",res.data);
           commit('SET_SNACKBAR',true)
           commit('SET_SNACKBARMSG_ERRRORMSG',res.data.message)
+          // window.open("/Home", '_self');
         })
         .catch(error => {
           console.log(error.res)
@@ -38,9 +37,6 @@ export default{
   },
 
   getters:{
-    getAllImages(state){
-      return state.allimages
-    },
     getSnackbarStutes(state){
     return state.Snackbar;
     },
