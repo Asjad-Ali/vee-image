@@ -17,10 +17,9 @@
       <v-row class="d-flex flex-column align-center justify-center my-10">
         <v-col >
                 <v-text-field
-                  v-model="imageObj.imageType"
+                  v-model="imageObj.status"
                   color="primary"
                   append-icon="mdi-image"
-                  :rules="nameRules"
                   label="Image Status"
                   hide-details=""
                   placeholder="Public, Private, Hidden"
@@ -58,8 +57,8 @@ export default {
   data() {
     return {
       imageObj:{
-        imageBase64:"",
-      imageType:"",
+        image:"",
+      status:"",
       },
       dropzoneOptions: {
         url: 'https://httpbin.org/post',
@@ -70,6 +69,7 @@ export default {
       },
     };
   },
+  
   methods:{
     upload(){
       console.log("I am image obj")
@@ -80,7 +80,7 @@ export default {
       if(response.status=="success")
       {
         
-        this.imageObj.imageBase64 = response.dataURL
+        this.imageObj.image = response.dataURL
         console.log("Successfully uploaded")
       }
       else
@@ -90,8 +90,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getSnackbarStutes"]),
-    ...mapGetters(["getSnackbarErrorMsg"]),
+    ...mapGetters("uploadImage", ["getSnackbarStutes"]),
+    ...mapGetters("uploadImage", ["getSnackbarErrorMsg"]),
   },
   mounted() {
     let token = JSON.parse(localStorage.getItem("Token"));

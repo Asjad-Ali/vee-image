@@ -19,9 +19,6 @@ export default{
       commit("SET_SNACKBAR",false);
      },
     upliadImageFun({commit},payload){
-    //   console.log("Upload image",payload)
-    //   let token=JSON.parse(localStorage.getItem("Token"))
-    //   axios.defaults.headers.common = {'Authorization': `Bearer ${token}`}
       axios.post("https://imagesharelink.herokuapp.com/api/upload_image",payload)
         .then((res) => {
           console.log("Update Response",res.data);

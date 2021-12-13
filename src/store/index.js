@@ -8,6 +8,7 @@ import imageView from './imageView'
 import updateProfile from './updateProfile'
 import currentUser from './currentUser'
 import uploadImage from './uploadImage'
+import getAllImage from './getAllImage'
 
 
 
@@ -23,7 +24,8 @@ export default new Vuex.Store({
     imageView,
     updateProfile,
     currentUser,
-    uploadImage
+    uploadImage,
+    getAllImage
 
   
   },

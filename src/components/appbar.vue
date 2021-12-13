@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-app-bar app color="white" elevation="2">
+  <v-container-fluid>
+    <v-app-bar color="white" elevation="2">
       <v-app-bar-nav-icon
         class="hidden-sm-and-up"
         @click="drawer = !drawer"
@@ -125,7 +125,7 @@
          <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
         {{ getSnackbarErrorMsg }}
       </v-snackbar>
-  </v-container>
+  </v-container-fluid>
 </template>
 
 <script>

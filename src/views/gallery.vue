@@ -18,15 +18,12 @@
         >
           <div class="d-flex align-center justify-center">
             <v-list class="d-flex flex-row ma-0 pa-0">
-              <v-list-item
-                v-for="item in baritems"
-                :key="item.title"
-                @click="router(item.val,item.title)"
-              >
+
+              <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-title class="body-1 font-weight-bold">{{
-                    item.title
-                  }}</v-list-item-title>
+                  <v-list-item-title  class="body-1 font-weight-bold">
+                    <v-btn @click="getAllImage" text small>All</v-btn>
+                  </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -121,6 +118,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Appbar from "../components/appbar.vue";
 
 export default {
@@ -153,18 +151,15 @@ export default {
         { title: "Get link", icon: "mdi-file-link" },
         { title: "Delete", icon: "mdi-delete" },
       ],
-      baritems: [
-        { title: "Public", val: 15 },
-        { title: "Private", val: 5 },
-        { title: "Hidden", val: 2 },
-      ],
     };
   },
+  computed:{
+    ...mapGetters("getAllImage",["getAllImages"])
+  },
   methods: {
-    router(val,cat) {
-      this.picture = val;
-      this.category=cat
-      // this.$router.push(route);
+    getAllImage() {
+      console.log("i am get All image")
+      this.$store.dispatch("getAllImage/getImageFun")
     },
   },
 };

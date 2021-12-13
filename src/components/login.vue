@@ -65,21 +65,19 @@
         </v-row>
       </v-container>
     </v-main>
+        <v-snackbar top color="black" :value="getSnackbarStutes" timeout="3000">
+      {{ getSnackbarErrorMsg }}
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 import appbar2 from "../components/appbar2.vue";
+import {mapGetters} from 'vuex'
 export default {
   components: { appbar2 },
   name: "signup",
-  computed: {
-    passwordMatch() {
-      return () =>
-        this.password === this.cpassword ||
-        "Password and Confirm password doesn't match";
-    },
-  },
+
   data() {
     return {
       show1: false,
@@ -103,9 +101,12 @@ export default {
     login() {
       if (this.$refs.form.validate()) {
         this.$store.dispatch("loginModule/login", this.loginUser);
-        
       }
     },
+  },
+    computed: {
+    ...mapGetters("loginModule", ["getSnackbarStutes"]),
+    ...mapGetters("loginModule", ["getSnackbarErrorMsg"]),
   },
 };
 </script>
