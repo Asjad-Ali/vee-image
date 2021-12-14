@@ -29,7 +29,7 @@ export default{
           commit('SET_SNACKBARMSG_ERRRORMSG',res.data.Message)
           open("/Home","_self")
         }).catch(error => {
-          console.log("Login catch error",error.data)
+          console.log("Login catch error",error.res)
         });
     }
   },

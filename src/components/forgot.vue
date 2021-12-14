@@ -62,8 +62,8 @@
         </v-row>
       </v-container>
     </v-main>
-     <v-snackbar top color="red" :value="getSnackbarStutes" timeout="3000">
-        {{ getSnackbarErrorMsg }}
+     <v-snackbar top color="black" :value="getSnackbarStatus" timeout="3000">
+        {{ getSnackbarMsg }}
       </v-snackbar>
   </div>
 </template>
@@ -75,8 +75,8 @@ export default {
   components: { Appbar2 },
   name: "signup",
   computed: {
-    ...mapGetters(["getSnackbarStutes"]),
-    ...mapGetters(["getSnackbarErrorMsg"]),
+  ...mapGetters("forgotModule", ["getSnackbarStatus"]),
+    ...mapGetters("forgotModule", ["getSnackbarMsg"]),
   },
   data() {
     return {

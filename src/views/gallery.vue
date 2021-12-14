@@ -21,13 +21,13 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-title  class="body-1 font-weight-bold">
-                    <v-btn class="body-1 font-weight-bold" @click="getAllImage" primary-text primary text small>All</v-btn>
+                    <v-btn class="body-1 font-weight-bold" primary-text primary text small>All Images</v-btn>
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
           </div>
-          <div class="d-flex align-center justify-center">
+          <!-- <div class="d-flex align-center justify-center">
             <v-list class="d-flex flex-row ma-0 pa-0">
               <v-list-item
               v-for="item in sample" :key="item.index"
@@ -41,7 +41,7 @@
               </a>
               </v-list-item>
             </v-list>
-          </div>
+          </div> -->
 
           <v-spacer></v-spacer>
           <div class="d-flex align-end justify-center">
@@ -121,7 +121,7 @@
           </v-row>
       </v-container>
 
-
+<!-- 
       <v-container>
         <div>
           <v-row>
@@ -188,7 +188,7 @@
             </v-col>
           </v-row>
         </div>
-      </v-container>
+      </v-container> -->
     </v-main>
   </v-app>
 </template>
@@ -214,16 +214,15 @@ export default {
         { title: "About Us", icon: "mdi-information" },
         { title: "Logout", icon: "mdi-logout" },
       ],
-      sample: [
-        { title: "Public", val: 3 },
-        { title: "Private", val: 5 },
-        { title: "Hidden", val: 2 },
-      ],
+      // sample: [
+      //   { title: "Public", val: 3 },
+      //   { title: "Private", val: 5 },
+      //   { title: "Hidden", val: 2 },
+      // ],
       imageSetting: [
         { title: "Public", icon: "mdi-earth" },
         { title: "Private", icon: "mdi-file-lock" },
         { title: "Hidden", icon: "mdi-lock-alert" },
-        { title: "Share", icon: "mdi-share"},
         { title: "Get link", icon: "mdi-file-link" },
         { title: "Delete", icon: "mdi-delete" },
       ],
@@ -245,11 +244,10 @@ export default {
       this.picture = val,
       this.category = cat
     },
-    getAllImage() {
-      console.log("i am get All image")
-      this.$store.dispatch("getAllImage/getImageFun")
-    },
   },
+  mounted(){
+       this.$store.dispatch("getAllImage/getImageFun")
+  }
 };
 </script>
 

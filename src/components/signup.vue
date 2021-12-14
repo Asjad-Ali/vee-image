@@ -99,7 +99,6 @@
                 ></v-text-field>
 
                   <v-btn
-
                     color="primary"
                     @click="signup"
                     block
@@ -158,7 +157,9 @@
           </v-row>
         </v-card>
       </v-container>
-
+    <v-snackbar top color="black" :value="getSnackbarStatus" timeout="3000">
+      {{ getSnackbarMsg }} and Verification Email send to your email
+    </v-snackbar>
       </v-main>
   </div>
 </template>
@@ -176,6 +177,9 @@ export default {
   name: "signup",
   computed: {
     ...mapGetters("signupModule", ["getResponse"]),
+    ...mapGetters("signupModule", ["getSnackbarStatus"]),
+    ...mapGetters("signupModule", ["getSnackbarMsg"]),
+    ...mapGetters("signupModule", ["getSnackbarErrorMsg"]),
 
     passwordMatch() {
       return () =>
