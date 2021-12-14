@@ -82,6 +82,7 @@ export default {
         
         this.imageObj.image = response.dataURL
         console.log("Successfully uploaded")
+        console.log(response)
       }
       else
       {

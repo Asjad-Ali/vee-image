@@ -102,6 +102,7 @@
                   aspect-ratio="1"
                   class="grey lighten-2"
                 >
+                <v-btn @click="show(image.link)">copy link</v-btn>
                   <template v-slot:placeholder>
                     <v-row
                       class="fill-height ma-0"
@@ -233,6 +234,10 @@ export default {
     
   },
   methods: {
+    show(link){
+      console.log(link)
+      alert("Your Image Link",link)
+    },
     singleImage(id){
       alert(id)
     },

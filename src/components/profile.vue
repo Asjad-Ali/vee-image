@@ -37,15 +37,6 @@
                   </v-file-input>
                 </v-row>
 
-                <v-text-field
-                  v-model="id"
-                  color="primary"
-                  append-icon="mdi-counter"
-                  label="Id"
-                  required
-                  outlined
-                  dense
-                ></v-text-field>
 
                 <v-text-field
                   v-model="name"
@@ -81,11 +72,12 @@
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="pfImageLink"
+                  v-model="password"
                   color="primary"
-                  readonly
-                  append-icon="mdi-link"
-                  label="Profile Image Link"
+                  append-icon="mdi-account-clock"
+                  label="Password"
+                  placeholder="********"
+                  
                   outlined
                   dense
                 ></v-text-field>
@@ -126,16 +118,15 @@ export default {
       // getuser:[],
       id: "",
       name: "",
-      email: "",
       age: "",
       image: "",
+      password:"",
       imgUrl:
         "https://www.icmetl.org/wp-content/uploads/2020/11/user-icon-human-person-sign-vector-10206693.png",
-      userUpdate: {
-        name: this.name,
-        age: this.age,
-        profile_pic: this.image,
-      },
+    //  test: "abc",
+    //  obj: {
+    //    name: this.test
+    //  }
     };
   },
 
@@ -152,17 +143,25 @@ export default {
       this.imgUrl = URL.createObjectURL(this.image);
     },
     update() {
-      this.$store.dispatch("updateProfile/updateProfile", this.userUpdate);
+      let userUpdate = {
+        name: this.name,
+        age: this.age,
+        profile_pic: this.image,
+        password: this.password
+      };
+
+      console.log("in update",userUpdate)
+
+      this.$store.dispatch("updateProfile/updateProfile", userUpdate);
     },
   },
   mounted() {
     const userData = JSON.parse(localStorage.getItem("currentUser"));
-    this.id = userData[0].id;
+
     this.name = userData[0].name;
     this.age = userData[0].age;
     this.email = userData[0].email;
     this.image = userData[0].profile_pic;
-    this.pfImageLink = userData[0].profile_pic;
   },
 };
 </script>
